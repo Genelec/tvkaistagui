@@ -92,7 +92,7 @@ void ProgrammeTableParser::startElementParsed(const QString &name)
     else if (m_x == 4 && name == "span") {
         parseFlags();
     }
-    else if (m_x == 2 && name == "span" && attribute("class") == "information") {
+    else if (m_x == 2 && name == "span" && attribute("class").contains("information")) {
         m_x = 5;
         m_parseContent = true;
     }
