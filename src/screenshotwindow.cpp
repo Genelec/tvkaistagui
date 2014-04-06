@@ -311,8 +311,8 @@ void ScreenshotWindow::changeHostToUrls(const QString &host)
     /* Muutetaan jonossa olevat osoitteet osoittamaan suoraan välimuistipalvelimelle, jotta
        uudelleenohjauspyyntöjä ei tarvitse tehdä.
 
-       Ennen: http://www.tvkaista.fi/feedbeta/programs/9173255/metadata/thumbs/thumb-0014.png
-       Jälkeen: http://de-proxy.tvkaista.fi/metadata/9173255/thumbs/thumb-0014.png
+       Ennen: http://www.tvkaista.com/feedbeta/programs/9173255/metadata/thumbs/thumb-0014.png
+       Jälkeen: http://de-proxy.tvkaista.com/metadata/9173255/thumbs/thumb-0014.png
     */
 
     QRegExp regexp("/(\\d+)/metadata/thumbs/(.+)$");

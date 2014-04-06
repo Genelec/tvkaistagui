@@ -74,7 +74,7 @@ void ChannelFeedParser::parseItemElement()
 
 int ChannelFeedParser::parseChannelId(const QString &s)
 {
-    /* "http://www.tvkaista.fi/feed/channels/1004" -> 1004 */
+    /* "http://www.tvkaista.com/feed/channels/1004" -> 1004 */
     int pos = s.lastIndexOf('/');
 
     if (pos < 0) {

@@ -64,12 +64,12 @@ void TvkaistaClient::setCookies(const QByteArray &cookieString)
     m_networkAccessManager->setCookieJar(new QNetworkCookieJar());
 
     QList<QNetworkCookie> cookies = QNetworkCookie::parseCookies(cookieString);
-    m_networkAccessManager->cookieJar()->setCookiesFromUrl(cookies, QUrl("http://www.tvkaista.fi/"));
+    m_networkAccessManager->cookieJar()->setCookiesFromUrl(cookies, QUrl("http://www.tvkaista.com/"));
 }
 
 QByteArray TvkaistaClient::cookies() const
 {
-    QList<QNetworkCookie> cookies = m_networkAccessManager->cookieJar()->cookiesForUrl(QUrl("http://www.tvkaista.fi/"));
+    QList<QNetworkCookie> cookies = m_networkAccessManager->cookieJar()->cookiesForUrl(QUrl("http://www.tvkaista.com/"));
     QByteArray cookieString;
     int count = cookies.size();
 
@@ -136,7 +136,7 @@ bool TvkaistaClient::isRequestUnfinished() const
 void TvkaistaClient::sendLoginRequest()
 {
     abortRequest();
-    QString urlString = "http://www.tvkaista.fi/";
+    QString urlString = "http://www.tvkaista.com/";
     qDebug() << "GET" << urlString;
     m_reply = m_networkAccessManager->get(QNetworkRequest(QUrl(urlString)));
     m_requestType = 1;
@@ -147,7 +147,7 @@ void TvkaistaClient::sendLoginRequest()
 void TvkaistaClient::sendChannelRequest()
 {
     abortRequest();
-    QString urlString = "http://www.tvkaista.fi/feed/channels/";
+    QString urlString = "http://www.tvkaista.com/feed/channels/";
     qDebug() << "GET" << urlString;
     QUrl url(urlString);
     QNetworkRequest request(url);
@@ -160,7 +160,7 @@ void TvkaistaClient::sendChannelRequest()
 void TvkaistaClient::sendProgrammeRequest(int channelId, const QDate &date)
 {
     abortRequest();
-    QString urlString = QString("http://www.tvkaista.fi/recordings/date/%1/%2/")
+    QString urlString = QString("http://www.tvkaista.com/recordings/date/%1/%2/")
                         .arg(date.toString("dd/MM/yyyy")).arg(channelId);
     qDebug() << "GET" << urlString;
     m_reply = m_networkAccessManager->get(QNetworkRequest(QUrl(urlString)));
@@ -175,7 +175,7 @@ void TvkaistaClient::sendProgrammeRequest(int channelId, const QDate &date)
 void TvkaistaClient::sendPosterRequest(const Programme &programme)
 {
     abortRequest();
-    QString urlString = QString("http://www.tvkaista.fi/resources/recordings/screengrabs/%1.jpg").arg(programme.id);
+    QString urlString = QString("http://www.tvkaista.com/resources/recordings/screengrabs/%1.jpg").arg(programme.id);
     qDebug() << "GET" << urlString;
     m_reply = m_networkAccessManager->get(QNetworkRequest(QUrl(urlString)));
     m_requestType = 5;
@@ -186,7 +186,7 @@ void TvkaistaClient::sendPosterRequest(const Programme &programme)
 
 QNetworkReply* TvkaistaClient::sendDetailedFeedRequest(const Programme &programme)
 {
-    QString urlString = QString("http://www.tvkaista.fi/feed/programs/%1/detailed.mediarss").arg(programme.id);
+    QString urlString = QString("http://www.tvkaista.com/feed/programs/%1/detailed.mediarss").arg(programme.id);
     qDebug() << "GET" << urlString;
     QUrl url(urlString);
     QNetworkRequest request(url);
@@ -211,7 +211,7 @@ QNetworkReply* TvkaistaClient::sendRequestWithAuthHeader(const QUrl &url)
 void TvkaistaClient::sendStreamRequest(const Programme &programme)
 {
     abortRequest();
-    QString urlString = QString("http://www.tvkaista.fi/recordings/download/%1/").arg(programme.id);
+    QString urlString = QString("http://www.tvkaista.com/recordings/download/%1/").arg(programme.id);
 
     switch (m_format) {
     case 0:
@@ -244,7 +244,7 @@ void TvkaistaClient::sendStreamRequest(const Programme &programme)
 void TvkaistaClient::sendSearchRequest(const QString &phrase)
 {
     abortRequest();
-    QString urlString = QString("http://www.tvkaista.fi/feed/search/title/%1/flv.mediarss").arg(phrase);
+    QString urlString = QString("http://www.tvkaista.com/feed/search/title/%1/flv.mediarss").arg(phrase);
     qDebug() << "GET" << urlString;
     QNetworkRequest request = QNetworkRequest(QUrl(urlString));
     m_reply = m_networkAccessManager->get(request);
@@ -256,7 +256,7 @@ void TvkaistaClient::sendSearchRequest(const QString &phrase)
 void TvkaistaClient::sendPlaylistRequest()
 {
     abortRequest();
-    QString urlString = "http://www.tvkaista.fi/feed/playlist/standard.mediarss";
+    QString urlString = "http://www.tvkaista.com/feed/playlist/standard.mediarss";
     qDebug() << "GET" << urlString;
     QNetworkRequest request = QNetworkRequest(QUrl(urlString));
     m_reply = m_networkAccessManager->get(request);
@@ -270,7 +270,7 @@ void TvkaistaClient::sendPlaylistAddRequest(int programmeId)
     abortRequest();
     QByteArray data("id=");
     data.append(QString::number(programmeId));
-    QString urlString = "http://www.tvkaista.fi/feed/playlist/";
+    QString urlString = "http://www.tvkaista.com/feed/playlist/";
     qDebug() << "POST" << urlString << data;
     QUrl url(urlString);
     QNetworkRequest request(url);
@@ -284,7 +284,7 @@ void TvkaistaClient::sendPlaylistAddRequest(int programmeId)
 void TvkaistaClient::sendPlaylistRemoveRequest(int programmeId)
 {
     abortRequest();
-    QString urlString = QString("http://www.tvkaista.fi/feed/playlist/%1/").arg(programmeId);
+    QString urlString = QString("http://www.tvkaista.com/feed/playlist/%1/").arg(programmeId);
     qDebug() << "DELETE" << urlString;
     QNetworkRequest request = QNetworkRequest(QUrl(urlString));
     m_reply = m_networkAccessManager->deleteResource(request);
@@ -296,7 +296,7 @@ void TvkaistaClient::sendPlaylistRemoveRequest(int programmeId)
 void TvkaistaClient::sendSeasonPassListRequest()
 {
     abortRequest();
-    QString urlString = "http://www.tvkaista.fi/feed/seasonpasses/*/standard.mediarss";
+    QString urlString = "http://www.tvkaista.com/feed/seasonpasses/*/standard.mediarss";
     qDebug() << "GET" << urlString;
     QNetworkRequest request = QNetworkRequest(QUrl(urlString));
     m_reply = m_networkAccessManager->get(request);
@@ -308,7 +308,7 @@ void TvkaistaClient::sendSeasonPassListRequest()
 void TvkaistaClient::sendSeasonPassIndexRequest()
 {
     abortRequest();
-    QString urlString = "http://www.tvkaista.fi/feed/seasonpasses/";
+    QString urlString = "http://www.tvkaista.com/feed/seasonpasses/";
     qDebug() << "GET" << urlString;
     QNetworkRequest request = QNetworkRequest(QUrl(urlString));
     m_reply = m_networkAccessManager->get(request);
@@ -322,7 +322,7 @@ void TvkaistaClient::sendSeasonPassAddRequest(int programmeId)
     abortRequest();
     QByteArray data("id=");
     data.append(QString::number(programmeId));
-    QString urlString = "http://www.tvkaista.fi/feed/seasonpasses/";
+    QString urlString = "http://www.tvkaista.com/feed/seasonpasses/";
     qDebug() << "POST" << urlString << data;
     QUrl url(urlString);
     QNetworkRequest request(url);
@@ -336,7 +336,7 @@ void TvkaistaClient::sendSeasonPassAddRequest(int programmeId)
 void TvkaistaClient::sendSeasonPassRemoveRequest(int seasonPassId)
 {
     abortRequest();
-    QString urlString = QString("http://www.tvkaista.fi/feed/seasonpasses/%1/").arg(seasonPassId);
+    QString urlString = QString("http://www.tvkaista.com/feed/seasonpasses/%1/").arg(seasonPassId);
     qDebug() << "DELETE" << urlString;
     QNetworkRequest request = QNetworkRequest(QUrl(urlString));
     m_reply = m_networkAccessManager->deleteResource(request);
@@ -353,7 +353,7 @@ void TvkaistaClient::frontPageRequestFinished()
     data.append("&password=");
     data.append(m_password.toUtf8().toPercentEncoding());
     data.append("&rememberme=unlessnot&action=login");
-    QString urlString = "http://www.tvkaista.fi/login/";
+    QString urlString = "http://www.tvkaista.com/login/";
     qDebug() << "POST" << urlString;
     QUrl url(urlString);
     QNetworkRequest request(url);
@@ -716,8 +716,8 @@ bool TvkaistaClient::checkResponse()
 void TvkaistaClient::setServerCookie()
 {
     QNetworkCookie serverCookie("preferred_servers", m_server.toAscii());
-    serverCookie.setDomain("www.tvkaista.fi");
-    m_networkAccessManager->cookieJar()->setCookiesFromUrl(QList<QNetworkCookie>() << serverCookie, QUrl("http://www.tvkaista.fi/"));
+    serverCookie.setDomain("www.tvkaista.com");
+    m_networkAccessManager->cookieJar()->setCookiesFromUrl(QList<QNetworkCookie>() << serverCookie, QUrl("http://www.tvkaista.com/"));
 }
 
 QString TvkaistaClient::networkErrorString(QNetworkReply::NetworkError error)

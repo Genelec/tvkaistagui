@@ -618,7 +618,7 @@ void MainWindow::watchProgramme()
     }
 
     if (m_formatComboBox->currentIndex() == 1) { /* Flash-video */
-        QString urlString = QString("http://www.tvkaista.fi/embed/%1")
+        QString urlString = QString("http://www.tvkaista.com/embed/%1")
                             .arg(m_currentProgramme.id);
 
         addHistoryEntry(m_currentProgramme.id);
@@ -1118,7 +1118,7 @@ void MainWindow::copyMiroFeedUrl()
     }
 
     if (m_currentView == 2) {
-        QString url = QString("http://tvkaista.fi/feed/playlist/%1").arg(filename);
+        QString url = QString("http://tvkaista.com/feed/playlist/%1").arg(filename);
         QApplication::clipboard()->setText(url);
     }
     else if (m_currentView == 3) {
@@ -1128,7 +1128,7 @@ void MainWindow::copyMiroFeedUrl()
             seasonPassIdString = QString::number(m_currentProgramme.seasonPassId);
         }
 
-        QString url = QString("http://www.tvkaista.fi/feed/seasonpasses/%3/%4").arg(
+        QString url = QString("http://www.tvkaista.com/feed/seasonpasses/%3/%4").arg(
                 seasonPassIdString, filename);
         QApplication::clipboard()->setText(url);
     }
@@ -1156,7 +1156,7 @@ void MainWindow::copyItunesFeedUrl()
     }
 
     if (m_currentView == 2) {
-        QString url = QString("itpc://www.tvkaista.fi/feed/playlist/%1").arg(filename);
+        QString url = QString("itpc://www.tvkaista.com/feed/playlist/%1").arg(filename);
         QApplication::clipboard()->setText(url);
     }
     else if (m_currentView == 3) {
@@ -1166,7 +1166,7 @@ void MainWindow::copyItunesFeedUrl()
             seasonPassIdString = QString::number(m_currentProgramme.seasonPassId);
         }
 
-        QString url = QString("itpc://www.tvkaista.fi/feed/seasonpasses/%1/%2").arg(
+        QString url = QString("itpc://www.tvkaista.com/feed/seasonpasses/%1/%2").arg(
             seasonPassIdString, filename);
         QApplication::clipboard()->setText(url);
     }

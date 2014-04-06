@@ -71,11 +71,11 @@ void SettingsDialog::openDirectoryDialog()
 
 void SettingsDialog::recoverPassword()
 {
-    if (!QDesktopServices::openUrl(QUrl("http://www.tvkaista.fi/login/recover/"))) {
+    if (!QDesktopServices::openUrl(QUrl("http://www.tvkaista.com/login/recover/"))) {
         QMessageBox msgBox(this);
         msgBox.setWindowTitle(windowTitle());
         msgBox.setText(trUtf8("Web-sivun avaaminen epäonnistui. Palauta salasana osoitteessa "
-                              "http://wwww.tvkaista.fi/login/recover/"));
+                              "http://wwww.tvkaista.com/login/recover/"));
         msgBox.setIcon(QMessageBox::Information);
         msgBox.exec();
         return;
@@ -84,11 +84,11 @@ void SettingsDialog::recoverPassword()
 
 void SettingsDialog::orderTVkaista()
 {
-    if (!QDesktopServices::openUrl(QUrl("http://www.tvkaista.fi/order/"))) {
+    if (!QDesktopServices::openUrl(QUrl("http://www.tvkaista.com/order/"))) {
         QMessageBox msgBox(this);
         msgBox.setWindowTitle(windowTitle());
         msgBox.setText(trUtf8("Web-sivun avaaminen epäonnistui. Tilaa TV-kaista osoitteesta "
-                              "http://wwww.tvkaista.fi/order/"));
+                              "http://wwww.tvkaista.com/order/"));
         msgBox.setIcon(QMessageBox::Information);
         msgBox.exec();
         return;

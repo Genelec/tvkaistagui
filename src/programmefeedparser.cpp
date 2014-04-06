@@ -118,8 +118,8 @@ void ProgrammeFeedParser::parseMediaGroupElement(Programme &programme)
 
 int ProgrammeFeedParser::parseProgrammeId(const QString &s)
 {
-    /* "http://tvkaista.fi/search/?findid=8155949" -> 8155949 */
-    /* "http://services.tvkaista.fi/feedbeta/seasonpasses/852238" -> 852238 */
+    /* "http://tvkaista.com/search/?findid=8155949" -> 8155949 */
+    /* "http://services.tvkaista.com/feedbeta/seasonpasses/852238" -> 852238 */
     int pos = s.lastIndexOf('=');
 
     if (pos < 0) {
@@ -138,7 +138,7 @@ int ProgrammeFeedParser::parseProgrammeId(const QString &s)
 
 int ProgrammeFeedParser::parseChannelId(const QString &s)
 {
-    /* "http://tvkaista.fi/feed/channels/1855486/flv.mediarss" -> 1855486 */
+    /* "http://tvkaista.com/feed/channels/1855486/flv.mediarss" -> 1855486 */
     int pos = s.indexOf("channels/");
 
     if (pos < 0) {
