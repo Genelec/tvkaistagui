@@ -25,7 +25,7 @@ void Downloader::start(const QUrl &url)
 
     if (m_byteOffset > 0) {
         qDebug() << "Range" << m_byteOffset;
-        request.setRawHeader("Range", QString("bytes=%1-").arg(m_byteOffset).toAscii());
+        request.setRawHeader("Range", QString("bytes=%1-").arg(m_byteOffset).toLatin1());
     }
 
     m_reply = m_client->sendRequest(request);

@@ -5,6 +5,7 @@
 #include <QNetworkProxy>
 #include <QNetworkReply>
 #include <QNetworkRequest>
+#include <QNetworkCookie>
 #include <QTimer>
 #include <QUrl>
 #include <QAuthenticator>
@@ -715,7 +716,7 @@ bool TvkaistaClient::checkResponse()
 
 void TvkaistaClient::setServerCookie()
 {
-    QNetworkCookie serverCookie("preferred_servers", m_server.toAscii());
+    QNetworkCookie serverCookie("preferred_servers", m_server.toLatin1());
     serverCookie.setDomain("www.tvkaista.com");
     m_networkAccessManager->cookieJar()->setCookiesFromUrl(QList<QNetworkCookie>() << serverCookie, QUrl("http://www.tvkaista.com/"));
 }

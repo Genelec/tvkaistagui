@@ -1,37 +1,43 @@
 #include <QApplication>
 #include <QFileInfo>
+#include <QtDebug>
+#include <QtGlobal>
 #include <QLocale>
 #include <QTranslator>
 #include <stdio.h>
 #include <stdlib.h>
 #include "mainwindow.h"
 
-void handleMessage(QtMsgType type, const char *msg, bool printDebugMessages)
+void handleMessage(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {
+    QByteArray localMsg = msg.toLocal8Bit();
+
+    bool debugprintstate = false;
+
     switch (type) {
     case QtDebugMsg:
-        if (printDebugMessages) fprintf(stderr, "%s\n", msg);
+        if (debugprintstate) fprintf(stderr, "Debug: %s (%s:%u, %s)\n", localMsg.constData(), context.file, context.line, context.function);
         break;
     case QtWarningMsg:
-        fprintf(stderr, "Warning: %s\n", msg);
+        fprintf(stderr, "Warning: %s (%s:%u, %s)\n", localMsg.constData(), context.file, context.line, context.function);
         break;
     case QtCriticalMsg:
-        fprintf(stderr, "Critical: %s\n", msg);
+        fprintf(stderr, "Critical: %s (%s:%u, %s)\n", localMsg.constData(), context.file, context.line, context.function);
         break;
     case QtFatalMsg:
-        fprintf(stderr, "Fatal: %s\n", msg);
+        fprintf(stderr, "Fatal: %s (%s:%u, %s)\n", localMsg.constData(), context.file, context.line, context.function);
         abort();
     }
 }
 
-void defaultMessageHandler(QtMsgType type, const char *msg)
+void defaultMessageHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {
-    handleMessage(type, msg, false);
+    handleMessage(type, context, msg);
 }
 
-void debugMessageHandler(QtMsgType type, const char *msg)
+void debugMessageHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {
-    handleMessage(type, msg, true);
+    handleMessage(type, context, msg);
 }
 
 int main(int argc, char *argv[])
@@ -47,13 +53,13 @@ int main(int argc, char *argv[])
     int count = arguments.size();
     bool invalidArgs = false;
 
-    qInstallMsgHandler(defaultMessageHandler);
+    qInstallMessageHandler(defaultMessageHandler);
 
     for (int i = 1; i < count; i++) {
         QString arg = arguments.at(i);
 
         if (arg == "-d" || arg == "--debug") {
-            qInstallMsgHandler(debugMessageHandler);
+            qInstallMessageHandler(debugMessageHandler);
         }
         else if (arg == "-p" || arg == "--http-proxy") {
             if (i + 1 >= count) {

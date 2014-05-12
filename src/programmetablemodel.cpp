@@ -1,4 +1,5 @@
 #include <QDebug>
+#include <QColor>
 #include "historymanager.h"
 #include "programmetablemodel.h"
 
@@ -79,11 +80,11 @@ QVariant ProgrammeTableModel::data(const QModelIndex &index, int role) const
         Programme programme = m_programmes.value(row);
 
         if ((programme.flags & m_flagMask) > 0 || m_removedRows.contains(row)) {
-            return Qt::darkGray;
+            return QColor(Qt::darkGray);
         }
 
         if (m_historyManager->containsProgramme(programme.id)) {
-            return Qt::darkMagenta;
+            return QColor(Qt::darkMagenta);
         }
     }
 

@@ -1655,7 +1655,7 @@ void MainWindow::updateChannelList()
 void MainWindow::updateDescription()
 {
     QString html("<p><b>");
-    html.append(Qt::escape(m_currentProgramme.title));
+    html.append(QString(m_currentProgramme.title).toHtmlEscaped());
     html.append("</b> ");
     html.append(trUtf8("%1 kanavalta %2").arg(
             m_currentProgramme.startDateTime.toString(trUtf8("ddd d.M.yyyy 'klo' h.mm")),
@@ -1667,7 +1667,7 @@ void MainWindow::updateDescription()
 
     html.append("</p>");
     html.append("</p><p>");
-    html.append(Qt::escape(m_currentProgramme.description));
+    html.append(QString(m_currentProgramme.description).toHtmlEscaped());
     html.append("</p>");
 
     if (m_currentProgramme.id >= 0 && (m_currentProgramme.flags & 0x08) == 0) {
@@ -2085,7 +2085,7 @@ QString MainWindow::encodePassword(const QString &password)
 
 QString MainWindow::decodePassword(const QString &password)
 {
-    return QString::fromUtf8(QByteArray::fromBase64(password.toAscii()).data());
+    return QString::fromUtf8(QByteArray::fromBase64(password.toLatin1()).data());
 }
 
 QString MainWindow::defaultStreamPlayerCommand()
@@ -2145,7 +2145,7 @@ QString MainWindow::defaultFilePlayerCommand()
 
 QString MainWindow::defaultDownloadDirectory()
 {
-    QString dir = QDesktopServices::storageLocation(QDesktopServices::MoviesLocation);
+    QString dir = QStandardPaths::standardLocations(QStandardPaths::MoviesLocation).at(0);
 
     if (dir.isEmpty()) {
         dir = QDir::homePath();

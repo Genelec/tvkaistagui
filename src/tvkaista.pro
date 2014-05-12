@@ -2,6 +2,7 @@
 # Project created by QtCreator 2010-12-14T11:39:12
 # -------------------------------------------------
 QT += core \
+    widgets \
     gui \
     xml \
     network
